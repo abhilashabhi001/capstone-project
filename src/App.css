@@ -1,9 +1,11 @@
 .header-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: clamp(2rem, 8vw, 6rem);
-  padding: clamp(1rem, 3vw, 2rem) 0;
+  justify-content: space-between;
+  gap: clamp(2rem, 10vw, 10rem);
+  padding: clamp(1rem, 3vw, 1rem) clamp(1rem, 4vw, 2rem) clamp(1rem, 2vw, 2rem);
+  margin: 0 auto;
+  max-width: min(90vw, 1200px);
 }
 
 .header-logo {
@@ -31,7 +33,7 @@ header nav a:hover {
 }
 
 .main-content {
-  margin: 0 clamp(1rem, 4vw, 2rem);
+  margin: 0 2rem;
   padding: clamp(2rem, 6vw, 2rem) 0;
   background-color: #495E57;
   overflow: visible;
@@ -39,14 +41,14 @@ header nav a:hover {
 }
 
 .hero-section {
+  max-width: min(90vw, 1200px);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  max-width: min(90vw, 860px);
-  margin: 0 auto;
   gap: clamp(2rem, 5vw, 4rem);
   flex-wrap: wrap;
-  padding: 0 clamp(1rem, 4vw, 4rem);
   position: relative;
 }
 
@@ -89,7 +91,7 @@ header nav a:hover {
   padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem);
   font-size: clamp(1rem, 2.5vw, 1.1rem);
   font-weight: bold;
-  border-radius: clamp(6px, 1.5vw, 8px);
+  border-radius: clamp(6px, 1.5vw, 1rem);
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -103,23 +105,226 @@ header nav a:hover {
   max-width: min(40vw, 400px);
   min-width: min(30vw, 300px);
   position: absolute;
-  right: clamp(1rem, 4vw, 4rem);
+  right: clamp(1rem, 4vw, 2rem);
   top: 0;
   z-index: 10;
 }
 
 .hero-image img {
-  width: 100%;
-  height: min(50vh, 430px);
+  width: 110%;
+  height: min(50vh, 420px);
   object-fit: cover;
   border-radius: clamp(12px, 2vw, 16px);
+  transform: translateX(-5%);
 }
 
-/* Responsive Design */
+/* Weekly Specials Section */
+.specials-section {
+  background-color: #FFFFFF;
+  padding: clamp(3rem, 8vw, 8rem) 0;
+  margin: 0;
+}
+
+.specials-container {
+  max-width: min(90vw, 1200px);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+}
+
+.specials-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+  flex-wrap: wrap;
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+.specials-header h2 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: #333;
+  margin: 0;
+  font-family: 'Markazi Text', serif;
+  font-weight: bold;
+}
+
+.online-menu-btn {
+  background-color: #F4CE14;
+  color: #333;
+  border: none;
+  padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  font-weight: bold;
+  border-radius: clamp(6px, 1.5vw, 10px);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.online-menu-btn:hover {
+  background-color: #E6B800;
+}
+
+.specials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 4vw, 2rem);
+}
+
+.special-card {
+  background: #FFFFFF;
+  border-radius: clamp(12px, 2vw, 16px) clamp(12px, 2vw, 16px) 0 0;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.special-image {
+  width: 100%;
+  height: clamp(200px, 25vw, 250px);
+  object-fit: cover;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.special-content {
+  padding: 0 1.5rem 2rem 1.5rem;
+  background-color: #EDEFEE;
+  flex: 1;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.special-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.special-header h3 {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  color: #333;
+  margin: 0;
+  font-weight: bold;
+}
+
+.price {
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  color: #EE9972;
+  font-weight: bold;
+}
+
+.special-description {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: #495E57;
+  line-height: 1.6;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+  flex: 1;
+}
+
+.special-footer {
+  margin-top: auto;
+  padding-top: clamp(0.5rem, 1vw, 1rem);
+}
+
+.order-delivery-info {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: black;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.2s ease;
+}
+
+.order-delivery-info:hover {
+  color: #495E57;
+}
+
+.delivery-icon {
+  filter: grayscale(100%) brightness(0%);
+  font-size: 1em;
+  transform: scaleX(-1);
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - MEDIA QUERIES
+   ======================================== */
+
+/* Large Desktops to Tablets */
+@media (max-width: 1200px) {
+  .specials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+  .specials-header {
+    flex-direction: column;
+    text-align: center;
+    gap: clamp(1rem, 3vw, 1.5rem);
+  }
+  
+  .online-menu-btn {
+    padding: clamp(0.7rem, 2vw, 0.9rem) clamp(1.2rem, 3vw, 1.5rem);
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+  }
+}
+
+/* Tablets and Large Mobile */
 @media (max-width: 768px) {
   .header-row {
     flex-direction: column;
-    gap: clamp(1rem, 3vw, 2rem);
+    gap: clamp(1rem, 3vw, 1rem);
+    justify-content: center;
   }
   
   header nav ul {
@@ -168,17 +373,24 @@ header nav a:hover {
     margin: 0 auto;
   }
   
-  /* .hero-image img {
+  .hero-image img {
     height: min(50vh, 300px);
-  } */
+  }
 }
 
-@media (max-width: 480px) {
-  .main-content {
-    margin: 0 clamp(0.5rem, 2vw, 1rem);
-    padding: clamp(1.5rem, 4vw, 2rem) 0;
+/* Mobile Landscape and Small Tablets */
+@media (max-width: 650px) {
+  .specials-grid {
+    grid-template-columns: 1fr;
   }
   
+  .special-content {
+    padding: 0 1rem 1.5rem 1rem;
+  }
+}
+
+/* Mobile Portrait */
+@media (max-width: 480px) {
   header nav ul {
     gap: clamp(0.6rem, 1.5vw, 1rem);
   }
@@ -209,44 +421,5 @@ header nav a:hover {
   .reserve-btn {
     padding: clamp(0.7rem, 3vw, 0.9rem) clamp(1.2rem, 5vw, 1.8rem);
     font-size: clamp(0.9rem, 4vw, 1rem);
-  }
-}
-
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
   }
 }
