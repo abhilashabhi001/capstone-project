@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 function BookingForm({ availableTimes, dispatch }) {
-
     const [form, setForm] = useState({
         date: "",
         time: "",
@@ -9,31 +8,84 @@ function BookingForm({ availableTimes, dispatch }) {
         occasion: "Birthday"
     });
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-        if (name === 'date') {
-            dispatch({
-                type: 'UPDATE_TIMES',
-                date: value
-            });
-        }
+    // Memoized change handler to prevent unnecessary re-renders
+    const handleChange = useCallback((e) => {
+        const { name, value } = e.target;
 
         setForm((prevForm) => ({
             ...prevForm,
             [name]: value
         }));
-    }
+    }, []);
 
-    const submitForm = (e) => {
+    // Effect to handle date changes - proper side effect management
+    useEffect(() => {
+        if (form.date && dispatch) {
+            dispatch({
+                type: 'UPDATE_TIMES',
+                date: form.date
+            });
+        }
+    }, [form.date, dispatch]);
+
+    // Effect to reset time when available times change
+    useEffect(() => {
+        if (form.time && !availableTimes.includes(form.time)) {
+            setForm(prevForm => ({
+                ...prevForm,
+                time: ""
+            }));
+        }
+    }, [availableTimes, form.time]);
+
+    // Memoized submit handler
+    const submitForm = useCallback(async (e) => {
         e.preventDefault();
-        setForm({
-            date: "",
-            time: "",
-            guests: 1,
-            occasion: "Birthday"
-        });
-    }
+
+        if (isSubmitting) return;
+
+        // Validation
+        if (!form.date || !form.time) {
+            alert('Please select both date and time');
+            return;
+        }
+
+        setIsSubmitting(true);
+
+        const formData = {
+            date: form.date,
+            time: form.time,
+            guests: parseInt(form.guests),
+            occasion: form.occasion
+        };
+
+        try {
+            let success = false;
+
+            // Use submitAPI if available, otherwise simulate success
+            if (window.submitAPI) {
+                success = window.submitAPI(formData);
+            }
+
+            if (success) {
+                setForm({
+                    date: "",
+                    time: "",
+                    guests: 1,
+                    occasion: "Birthday"
+                });
+                alert('Reservation successful!');
+            } else {
+                alert('Failed to submit reservation. Please try again.');
+            }
+        } catch (error) {
+            alert('An error occurred. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    }, [form, isSubmitting]);
     return (
         <main className="booking-page" role="main" aria-labelledby="booking-title">
             <section className="booking-hero" role="banner">
@@ -81,7 +133,7 @@ function BookingForm({ availableTimes, dispatch }) {
                                 aria-describedby="time-help"
                             >
                                 <option value="">Select a time</option>
-                                {availableTimes.map((time) => (
+                                {availableTimes?.map((time) => (
                                     <option key={time} value={time}>
                                         {time}
                                     </option>
@@ -133,8 +185,9 @@ function BookingForm({ availableTimes, dispatch }) {
                             className="submit-btn"
                             role="button"
                             aria-describedby="submit-help"
+                            disabled={isSubmitting}
                         >
-                            Make Your Reservation
+                            {isSubmitting ? 'Submitting...' : 'Make Your Reservation'}
                         </button>
                         <span id="submit-help" className="sr-only">
                             Submit your reservation request
