@@ -371,7 +371,7 @@ header nav a.active::after {
 /* Customers Say Section */
 .customers-say {
   background-color: #495E57;
-  padding: 0.5rem 0 clamp(3rem, 1vw, 8rem) 0;
+  padding: 0.5rem 0 clamp(2rem, 1vw, 8rem) 0;
 }
 
 .customers-container {
@@ -386,6 +386,8 @@ header nav a.active::after {
   text-align: center;
   font-family: 'Markazi Text', serif;
   font-weight: bold;
+  margin: 0;
+  padding: 2rem 0;
 }
 
 .testimonials-grid {
@@ -517,7 +519,7 @@ header nav a.active::after {
 
 .booking-hero {
   background-color: #495E57;
-  padding: clamp(3rem, 6vw, 4rem) 0;
+  padding: clamp(2rem, 6vw, 2rem) 0;
 }
 
 .booking-container {

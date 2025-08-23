@@ -1,8 +1,7 @@
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Homepage from './Homepage';
-import BookingForm from './BookingForm';
+import BookingPage from './BookingPage';
 import Chicago from './Chicago';
-import { useEffect } from 'react';
 
 function Main() {
     return (
@@ -10,7 +9,12 @@ function Main() {
             <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/about" element={<Chicago />} />
-                <Route path="/booking" element={<BookingForm />} />
+                <Route
+                    path="/booking"
+                    element={
+                        <BookingPage />
+                    }
+                />
                 <Route path="/menu" element={<div>Menu Page - Coming Soon</div>} />
                 <Route path="/order" element={<div>Order Online - Coming Soon</div>} />
                 <Route path="/login" element={<div>Login Page - Coming Soon</div>} />

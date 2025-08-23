@@ -1,4 +1,39 @@
-function BookingForm() {
+import { useState } from "react";
+
+function BookingForm({ availableTimes, dispatch }) {
+
+    const [form, setForm] = useState({
+        date: "",
+        time: "",
+        guests: 1,
+        occasion: "Birthday"
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        if (name === 'date') {
+            dispatch({
+                type: 'UPDATE_TIMES',
+                date: value
+            });
+        }
+
+        setForm((prevForm) => ({
+            ...prevForm,
+            [name]: value
+        }));
+    }
+
+    const submitForm = (e) => {
+        e.preventDefault();
+        setForm({
+            date: "",
+            time: "",
+            guests: 1,
+            occasion: "Birthday"
+        });
+    }
     return (
         <main className="booking-page">
             <section className="booking-hero">
@@ -7,30 +42,36 @@ function BookingForm() {
                     <p>Book your table at Little Lemon for an unforgettable Mediterranean dining experience.</p>
                 </div>
             </section>
-            
             <section className="booking-form-section">
                 <div className="booking-container">
-                    <form className="booking-form">
+                    <form className="booking-form" onSubmit={submitForm}>
                         <div className="form-group">
                             <label htmlFor="date">Choose date:</label>
                             <input
                                 type="date"
                                 id="date"
                                 name="date"
+                                value={form.date}
+                                onChange={handleChange}
                                 required
                             />
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="time">Choose time:</label>
-                            <select id="time" name="time" required>
+                            <select
+                                id="time"
+                                name="time"
+                                value={form.time}
+                                onChange={handleChange}
+                                required
+                            >
                                 <option value="">Select a time</option>
-                                <option value="17:00">17:00</option>
-                                <option value="18:00">18:00</option>
-                                <option value="19:00">19:00</option>
-                                <option value="20:00">20:00</option>
-                                <option value="21:00">21:00</option>
-                                <option value="22:00">22:00</option>
+                                {availableTimes.map((time) => (
+                                    <option key={time} value={time}>
+                                        {time}
+                                    </option>
+                                ))}
                             </select>
                         </div>
 
@@ -42,19 +83,22 @@ function BookingForm() {
                                 name="guests"
                                 min="1"
                                 max="10"
-                                defaultValue="1"
+                                value={form.guests}
+                                onChange={handleChange}
                                 required
                             />
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="occasion">Occasion:</label>
-                            <select id="occasion" name="occasion">
+                            <select
+                                id="occasion"
+                                name="occasion"
+                                value={form.occasion}
+                                onChange={handleChange}
+                            >
                                 <option value="Birthday">Birthday</option>
                                 <option value="Anniversary">Anniversary</option>
-                                <option value="Date">Date</option>
-                                <option value="Business">Business</option>
-                                <option value="Other">Other</option>
                             </select>
                         </div>
 
