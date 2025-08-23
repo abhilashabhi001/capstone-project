@@ -1,3 +1,61 @@
+/* Performance Optimizations */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  will-change: scroll-position;
+}
+
+/* Image Performance Optimizations */
+img {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.loaded {
+  opacity: 1 !important;
+}
+
+.loading {
+  opacity: 0;
+}
+
+/* Smooth transitions for performance */
+.hero-image,
+.special-image,
+.chef-image-1,
+.chef-image-2,
+.chef-image-3,
+.chef-image-4 {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
 .header-row {
   display: flex;
   align-items: center;
@@ -25,11 +83,27 @@ header nav a {
   text-decoration: none;
   font-size: clamp(0.9rem, 2vw, 1.1rem);
   font-weight: bold;
-  transition: color 0.2s;
+  transition: color 0.3s ease;
+  position: relative;
 }
 
 header nav a:hover {
-  color: #61dafb;
+  color: #495E57;
+}
+
+header nav a.active {
+  color: #495E57;
+}
+
+header nav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #495E57;
+  border-radius: 1px;
 }
 
 .main-content {
@@ -121,7 +195,7 @@ header nav a:hover {
 /* Weekly Specials Section */
 .specials-section {
   background-color: #FFFFFF;
-  padding: clamp(3rem, 8vw, 8rem) 0;
+  padding: clamp(3rem, 7vw, 8rem) 0;
   margin: 0;
 }
 
@@ -294,13 +368,269 @@ header nav a:hover {
   }
 }
 
+/* Customers Say Section */
+.customers-say {
+  background-color: #495E57;
+  padding: 0.5rem 0 clamp(3rem, 1vw, 8rem) 0;
+}
+
+.customers-container {
+  max-width: min(90vw, 1200px);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+}
+
+.customers-say h2 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: #EDEFEE;
+  text-align: center;
+  font-family: 'Markazi Text', serif;
+  font-weight: bold;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 4vw, 2rem);
+}
+
+.testimonial-card {
+  background: #EDEFEE;
+  border-radius: clamp(12px, 2vw, 16px);
+  padding: clamp(1.5rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.rating .stars {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  color: #F4CE14;
+}
+
+.customer-info {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.8rem, 2vw, 1rem);
+}
+
+.customer-image {
+  width: clamp(50px, 10vw, 60px);
+  height: clamp(50px, 10vw, 60px);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.customer-info h3 {
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  color: #333;
+  margin: 0;
+  font-weight: bold;
+}
+
+.review-text {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: #495E57;
+  line-height: 1.6;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Chicago Section */
+.chicago-section {
+  background-color: #FFFFFF;
+  padding: clamp(3rem, 8vw, 8rem) 0;
+  contain: layout style paint;
+  transform: translateZ(0);
+}
+
+.chicago-container {
+  max-width: min(90vw, 1200px);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+}
+
+.chicago-content {
+  display: flex;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: flex-start;
+  contain: layout;
+}
+
+.chicago-text {
+  flex: 1;
+}
+
+.chicago-text h2 {
+  font-size: clamp(2.5rem, 6vw, 3rem);
+  color: #F4CE14;
+  margin: 0;
+  font-family: 'Markazi Text', serif;
+  font-weight: bold;
+}
+
+.chicago-text h3 {
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  color: #495E57;
+  margin: 0 0 clamp(1rem, 3vw, 1.5rem) 0;
+  font-family: 'Markazi Text', serif;
+}
+
+.chicago-text p {
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  color: #495E57;
+  line-height: 1.6;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+}
+
+.chicago-images {
+  flex: 0 0 min(50vw, 500px);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
+  position: relative;
+  contain: layout style paint;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.chef-image {
+  width: 100%;
+  height: clamp(150px, 20vw, 200px);
+  object-fit: cover;
+  border-radius: clamp(12px, 2vw, 16px);
+  transition: transform 0.2s ease;
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.chef-image:hover {
+  transform: translateZ(0) scale(1.02);
+}
+
+/* Booking Page */
+.booking-page {
+  min-height: 80vh;
+}
+
+.booking-hero {
+  background-color: #495E57;
+  padding: clamp(3rem, 6vw, 4rem) 0;
+}
+
+.booking-container {
+  max-width: min(90vw, 1200px);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+}
+
+.booking-hero h1 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  color: #F4CE14;
+  margin: 0 0 clamp(1rem, 3vw, 1.5rem) 0;
+  font-family: 'Markazi Text', serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+.booking-hero p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: #EDEFEE;
+  text-align: center;
+  margin: 0;
+}
+
+.booking-form-section {
+  background-color: #FFFFFF;
+  padding: clamp(3rem, 6vw, 4rem) 0;
+}
+
+.booking-form {
+  max-width: clamp(400px, 50vw, 500px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1vw, 0.8rem);
+}
+
+.form-group label {
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  color: #495E57;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+  padding: clamp(0.8rem, 2vw, 1rem);
+  border: 2px solid #EDEFEE;
+  border-radius: clamp(6px, 1.5vw, 8px);
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  background-color: #FFFFFF;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #F4CE14;
+}
+
+.submit-btn {
+  background-color: #F4CE14;
+  color: #333;
+  border: none;
+  padding: clamp(1rem, 2.5vw, 1.2rem) clamp(2rem, 4vw, 2.5rem);
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  font-weight: bold;
+  border-radius: clamp(6px, 1.5vw, 8px);
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+.submit-btn:hover {
+  background-color: #E6B800;
+}
+
+/* Link Styling for Reserve Button */
+.reserve-btn {
+  background-color: #F4CE14;
+  color: #333;
+  border: none;
+  padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  font-weight: bold;
+  border-radius: clamp(6px, 1.5vw, 1rem);
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.reserve-btn:hover {
+  background-color: #E6B800;
+}
+
 /* ========================================
    RESPONSIVE DESIGN - MEDIA QUERIES
    ======================================== */
 
+
 /* Large Desktops to Tablets */
 @media (max-width: 1200px) {
   .specials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .testimonials-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -316,6 +646,22 @@ header nav a:hover {
   .online-menu-btn {
     padding: clamp(0.7rem, 2vw, 0.9rem) clamp(1.2rem, 3vw, 1.5rem);
     font-size: clamp(0.9rem, 2.5vw, 1rem);
+  }
+  
+  .chicago-content {
+    flex-direction: column;
+    gap: clamp(2rem, 5vw, 3rem);
+  }
+  
+  .chicago-images {
+    flex: none;
+    max-width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(0.8rem, 2vw, 1.2rem);
+  }
+  
+  .chef-image {
+    height: clamp(120px, 18vw, 160px);
   }
 }
 
@@ -336,6 +682,19 @@ header nav a:hover {
   header nav a {
     font-size: clamp(1rem, 3vw, 1.2rem);
     padding: clamp(0.5rem, 1vw, 0.8rem) 0;
+  }
+
+  header nav a:hover {
+    color: #495E57;
+  }
+
+  header nav a.active {
+    color: #495E57;
+  }
+
+  header nav a.active::after {
+    bottom: -2px;
+    height: 2px;
   }
   
   .hero-section {
@@ -386,6 +745,20 @@ header nav a:hover {
   
   .special-content {
     padding: 0 1rem 1.5rem 1rem;
+  }
+  
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .chicago-images {
+    grid-template-columns: 1fr;
+    gap: clamp(0.8rem, 2vw, 1rem);
+  }
+  
+  .chef-image {
+    grid-column: 1;
+    height: clamp(180px, 25vw, 220px);
   }
 }
 

@@ -1,8 +1,9 @@
-import lemonDesert from '../assets/lemonDessert.jpg';
-import greekSalad from '../assets/greekSalad.jpg';
-import bruchetta from '../assets/bruchetta.svg';
+import React, { memo } from 'react';
+import lemonDesert from '../assets/images/lemonDessert.jpg';
+import greekSalad from '../assets/images/greekSalad.jpg';
+import bruchetta from '../assets/images/bruchetta.svg';
 
-function Specials() {
+const Specials = memo(() => {
     return (
         <section className="specials-section">
             <div className="specials-container">
@@ -13,7 +14,13 @@ function Specials() {
                 
                 <div className="specials-grid">
                     <article className="special-card">
-                        <img src={greekSalad} alt="Greek Salad" className="special-image" />
+                        <img 
+                            src={greekSalad} 
+                            alt="Greek Salad" 
+                            className="special-image"
+                            loading="lazy"
+                            style={{ willChange: 'transform' }}
+                        />
                         <div className="special-content">
                             <header className="special-header">
                                 <h4>Greek Salad</h4>
@@ -29,7 +36,13 @@ function Specials() {
                     </article>
 
                     <article className="special-card">
-                        <img src={bruchetta} alt="Bruschetta" className="special-image" />
+                        <img 
+                            src={bruchetta} 
+                            alt="Bruschetta" 
+                            className="special-image"
+                            loading="lazy"
+                            style={{ willChange: 'transform' }}
+                        />
                         <div className="special-content">
                             <header className="special-header">
                                 <h4>Bruschetta</h4>
@@ -45,7 +58,13 @@ function Specials() {
                     </article>
 
                     <article className="special-card">
-                        <img src={lemonDesert} alt="Lemon Dessert" className="special-image" />
+                        <img 
+                            src={lemonDesert} 
+                            alt="Lemon Dessert" 
+                            className="special-image"
+                            loading="lazy"
+                            style={{ willChange: 'transform' }}
+                        />
                         <div className="special-content">
                             <header className="special-header">
                                 <h4>Lemon Dessert</h4>
@@ -63,6 +82,6 @@ function Specials() {
             </div>
         </section>
     );
-}
+});
 
 export default Specials;
