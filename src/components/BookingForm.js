@@ -35,18 +35,25 @@ function BookingForm({ availableTimes, dispatch }) {
         });
     }
     return (
-        <main className="booking-page">
-            <section className="booking-hero">
+        <main className="booking-page" role="main" aria-labelledby="booking-title">
+            <section className="booking-hero" role="banner">
                 <div className="booking-container">
-                    <h1>Reserve a Table</h1>
+                    <h1 id="booking-title">Reserve a Table</h1>
                     <p>Book your table at Little Lemon for an unforgettable Mediterranean dining experience.</p>
                 </div>
             </section>
-            <section className="booking-form-section">
+            <section className="booking-form-section" role="region" aria-labelledby="form-heading">
                 <div className="booking-container">
-                    <form className="booking-form" onSubmit={submitForm}>
-                        <div className="form-group">
-                            <label htmlFor="date">Choose date:</label>
+                    <h2 id="form-heading" className="sr-only">Reservation Form</h2>
+                    <form
+                        className="booking-form"
+                        onSubmit={submitForm}
+                        role="form"
+                        aria-label="Restaurant table reservation form"
+                        noValidate
+                    >
+                        <div className="form-group" role="group" aria-labelledby="date-label">
+                            <label id="date-label" htmlFor="date">Choose date:</label>
                             <input
                                 type="date"
                                 id="date"
@@ -54,17 +61,24 @@ function BookingForm({ availableTimes, dispatch }) {
                                 value={form.date}
                                 onChange={handleChange}
                                 required
+                                aria-required="true"
+                                aria-describedby="date-help"
                             />
+                            <span id="date-help" className="sr-only">
+                                Select your preferred reservation date
+                            </span>
                         </div>
 
-                        <div className="form-group">
-                            <label htmlFor="time">Choose time:</label>
+                        <div className="form-group" role="group" aria-labelledby="time-label">
+                            <label id="time-label" htmlFor="time">Choose time:</label>
                             <select
                                 id="time"
                                 name="time"
                                 value={form.time}
                                 onChange={handleChange}
                                 required
+                                aria-required="true"
+                                aria-describedby="time-help"
                             >
                                 <option value="">Select a time</option>
                                 {availableTimes.map((time) => (
@@ -73,10 +87,13 @@ function BookingForm({ availableTimes, dispatch }) {
                                     </option>
                                 ))}
                             </select>
+                            <span id="time-help" className="sr-only">
+                                Available times based on selected date
+                            </span>
                         </div>
 
-                        <div className="form-group">
-                            <label htmlFor="guests">Number of guests:</label>
+                        <div className="form-group" role="group" aria-labelledby="guests-label">
+                            <label id="guests-label" htmlFor="guests">Number of guests:</label>
                             <input
                                 type="number"
                                 id="guests"
@@ -86,23 +103,42 @@ function BookingForm({ availableTimes, dispatch }) {
                                 value={form.guests}
                                 onChange={handleChange}
                                 required
+                                aria-required="true"
+                                aria-describedby="guests-help"
                             />
+                            <span id="guests-help" className="sr-only">
+                                Enter number of guests between 1 and 10
+                            </span>
                         </div>
 
-                        <div className="form-group">
-                            <label htmlFor="occasion">Occasion:</label>
+                        <div className="form-group" role="group" aria-labelledby="occasion-label">
+                            <label id="occasion-label" htmlFor="occasion">Occasion:</label>
                             <select
                                 id="occasion"
                                 name="occasion"
                                 value={form.occasion}
                                 onChange={handleChange}
+                                aria-describedby="occasion-help"
                             >
                                 <option value="Birthday">Birthday</option>
                                 <option value="Anniversary">Anniversary</option>
                             </select>
+                            <span id="occasion-help" className="sr-only">
+                                Optional: Select the occasion for your visit
+                            </span>
                         </div>
 
-                        <button type="submit" className="submit-btn">Make Your Reservation</button>
+                        <button
+                            type="submit"
+                            className="submit-btn"
+                            role="button"
+                            aria-describedby="submit-help"
+                        >
+                            Make Your Reservation
+                        </button>
+                        <span id="submit-help" className="sr-only">
+                            Submit your reservation request
+                        </span>
                     </form>
                 </div>
             </section>

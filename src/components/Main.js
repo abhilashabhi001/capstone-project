@@ -5,7 +5,7 @@ import Chicago from './Chicago';
 
 function Main() {
     return (
-        <main>
+        <main role="main" aria-label="Main content">
             <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/about" element={<Chicago />} />
@@ -15,9 +15,9 @@ function Main() {
                         <BookingPage />
                     }
                 />
-                <Route path="/menu" element={<div>Menu Page - Coming Soon</div>} />
-                <Route path="/order" element={<div>Order Online - Coming Soon</div>} />
-                <Route path="/login" element={<div>Login Page - Coming Soon</div>} />
+                <Route path="/menu" element={<div role="region" aria-label="Menu page placeholder">Menu Page - Coming Soon</div>} />
+                <Route path="/order" element={<div role="region" aria-label="Order online page placeholder">Order Online - Coming Soon</div>} />
+                <Route path="/login" element={<div role="region" aria-label="Login page placeholder">Login Page - Coming Soon</div>} />
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
         </main>

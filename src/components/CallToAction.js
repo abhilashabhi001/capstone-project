@@ -3,24 +3,37 @@ import restaurantfood from '../assets/images/restauranFood.jpg';
 
 const CallToAction = memo(() => {
     return (
-        <section className="main-content">
+        <section className="main-content" role="region" aria-labelledby="hero-heading">
             <div className="hero-section">
                 <div className="hero-text">
-                    <h1>Little Lemon</h1>
+                    <h1 id="hero-heading">Little Lemon</h1>
                     <h2>Chicago</h2>
                     <p>We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.</p>
-                    <a href="/booking" className="reserve-btn">Reserve a Table</a>
+                    <a
+                        href="/booking"
+                        className="reserve-btn"
+                        role="button"
+                        aria-describedby="reserve-description"
+                    >
+                        Reserve a Table
+                    </a>
+                    <span id="reserve-description" className="sr-only">
+                        Navigate to booking page to make a reservation
+                    </span>
                 </div>
-                <div className="hero-image">
-                    <img 
-                        src={restaurantfood} 
-                        alt="Little Lemon Restaurant"
+                <div className="hero-image" role="img" aria-labelledby="hero-img-desc">
+                    <img
+                        src={restaurantfood}
+                        alt="Delicious Mediterranean food served at Little Lemon restaurant"
                         loading="eager"
                         style={{
                             willChange: 'transform',
                             backfaceVisibility: 'hidden'
                         }}
                     />
+                    <span id="hero-img-desc" className="sr-only">
+                        Featured Mediterranean dish from Little Lemon restaurant
+                    </span>
                 </div>
             </div>
         </section>
