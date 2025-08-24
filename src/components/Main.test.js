@@ -21,6 +21,12 @@ jest.mock('./Chicago', () => {
   };
 });
 
+jest.mock('./ConfirmedBooking', () => {
+  return function MockConfirmedBooking() {
+    return <div data-testid="confirmed-booking">Confirmed Booking Component</div>;
+  };
+});
+
 const MainWithRouter = ({ initialEntries = ['/'] }) => (
   <MemoryRouter initialEntries={initialEntries}>
     <Main />
@@ -69,6 +75,12 @@ describe('Main Component', () => {
     render(<MainWithRouter initialEntries={['/login']} />);
 
     expect(screen.getByText('Login Page - Coming Soon')).toBeInTheDocument();
+  });
+
+  test('renders ConfirmedBooking component on confirmed route', () => {
+    render(<MainWithRouter initialEntries={['/confirmed']} />);
+
+    expect(screen.getByTestId('confirmed-booking')).toBeInTheDocument();
   });
 
   test('redirects to home page for invalid routes', () => {

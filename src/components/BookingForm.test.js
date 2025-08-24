@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import BookingForm from './BookingForm';
 
@@ -46,19 +46,27 @@ describe('BookingForm Component', () => {
         const occasionSelect = document.getElementById('occasion');
 
         // Test date input
-        fireEvent.change(dateInput, { target: { value: '2024-12-25' } });
+        await act(async () => {
+            fireEvent.change(dateInput, { target: { value: '2024-12-25' } });
+        });
         expect(dateInput.value).toBe('2024-12-25');
 
         // Test time select
-        fireEvent.change(timeSelect, { target: { value: '19:00' } });
+        await act(async () => {
+            fireEvent.change(timeSelect, { target: { value: '19:00' } });
+        });
         expect(timeSelect.value).toBe('19:00');
 
         // Test guests input
-        fireEvent.change(guestsInput, { target: { value: '4' } });
+        await act(async () => {
+            fireEvent.change(guestsInput, { target: { value: '4' } });
+        });
         expect(guestsInput.value).toBe('4');
 
         // Test occasion select
-        fireEvent.change(occasionSelect, { target: { value: 'Anniversary' } });
+        await act(async () => {
+            fireEvent.change(occasionSelect, { target: { value: 'Anniversary' } });
+        });
         expect(occasionSelect.value).toBe('Anniversary');
     });
 
@@ -75,12 +83,16 @@ describe('BookingForm Component', () => {
         const timeSelect = document.getElementById('time');
         const guestsInput = document.getElementById('guests');
 
-        fireEvent.change(dateInput, { target: { value: '2024-12-25' } });
-        fireEvent.change(timeSelect, { target: { value: '19:00' } });
-        fireEvent.change(guestsInput, { target: { value: '4' } });
+        await act(async () => {
+            fireEvent.change(dateInput, { target: { value: '2024-12-25' } });
+            fireEvent.change(timeSelect, { target: { value: '19:00' } });
+            fireEvent.change(guestsInput, { target: { value: '4' } });
+        });
 
         // Submit the form
-        fireEvent.click(screen.getByText(/make your reservation/i));
+        await act(async () => {
+            fireEvent.click(screen.getByText(/make your reservation/i));
+        });
 
         // Form should be submitted
         await waitFor(() => {
@@ -88,7 +100,7 @@ describe('BookingForm Component', () => {
         });
     });
 
-    test('validation prevents submission with empty required fields', () => {
+    test('validation prevents submission with empty required fields', async () => {
         render(
             <BookingFormWithRouter
                 availableTimes={mockAvailableTimes}
@@ -99,7 +111,9 @@ describe('BookingForm Component', () => {
         const submitButton = screen.getByText(/make your reservation/i);
 
         // Try to submit without filling required fields
-        fireEvent.click(submitButton);
+        await act(async () => {
+            fireEvent.click(submitButton);
+        });
 
         // Form should still be present (not submitted)
         expect(screen.getByText(/reserve a table/i)).toBeInTheDocument();

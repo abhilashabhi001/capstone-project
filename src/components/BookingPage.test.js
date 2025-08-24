@@ -1,9 +1,19 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import BookingPage from './BookingPage';
 
 // Mock the global API
 const mockFetchAPI = jest.fn();
 const mockSubmitAPI = jest.fn();
+
+// Helper function to render BookingPage with Router context
+const renderWithRouter = (component, { route = '/' } = {}) => {
+    return render(
+        <MemoryRouter initialEntries={[route]}>
+            {component}
+        </MemoryRouter>
+    );
+};
 
 beforeEach(() => {
     // Reset mocks
@@ -24,7 +34,7 @@ afterEach(() => {
 describe('BookingPage Component', () => {
     test('renders BookingForm component', () => {
         mockFetchAPI.mockReturnValue(['17:00', '18:00', '19:00']);
-        render(<BookingPage />);
+        renderWithRouter(<BookingPage />);
 
         // Check if form elements are present using htmlFor
         expect(document.getElementById('date')).toBeInTheDocument();
@@ -37,7 +47,7 @@ describe('BookingPage Component', () => {
         const mockTimes = ['17:00', '18:00', '19:00', '20:00', '21:00'];
         mockFetchAPI.mockReturnValue(mockTimes);
 
-        render(<BookingPage />);
+        renderWithRouter(<BookingPage />);
 
         await waitFor(() => {
             expect(mockFetchAPI).toHaveBeenCalledTimes(1);
@@ -55,7 +65,7 @@ describe('BookingPage Component', () => {
         // Remove the API
         delete global.window.fetchAPI;
 
-        render(<BookingPage />);
+        renderWithRouter(<BookingPage />);
 
         await waitFor(() => {
             const timeSelect = document.getElementById('time');
@@ -74,7 +84,7 @@ describe('BookingPage Component', () => {
             .mockReturnValueOnce(initialTimes)  // Initial call
             .mockReturnValueOnce(updatedTimes); // Date change call
 
-        render(<BookingPage />);
+        renderWithRouter(<BookingPage />);
 
         // Wait for initial load
         await waitFor(() => {
@@ -83,7 +93,9 @@ describe('BookingPage Component', () => {
 
         // Change date
         const dateInput = document.getElementById('date');
-        fireEvent.change(dateInput, { target: { value: '2024-12-25' } });
+        await act(async () => {
+            fireEvent.change(dateInput, { target: { value: '2024-12-25' } });
+        });
 
         await waitFor(() => {
             expect(mockFetchAPI).toHaveBeenCalledTimes(2);
@@ -100,7 +112,7 @@ describe('BookingPage Component', () => {
         const mockTimes = ['17:00', '18:00'];
         mockFetchAPI.mockReturnValue(mockTimes);
 
-        render(<BookingPage />);
+        renderWithRouter(<BookingPage />);
 
         // Check if BookingForm receives the times
         const timeSelect = document.getElementById('time');
@@ -116,14 +128,14 @@ describe('BookingPage useEffect Management', () => {
     test('useEffect runs only once on mount with empty dependency', async () => {
         mockFetchAPI.mockReturnValue(['17:00', '18:00']);
 
-        render(<BookingPage />);
+        renderWithRouter(<BookingPage />);
 
         await waitFor(() => {
             expect(mockFetchAPI).toHaveBeenCalledTimes(1);
         });
 
         // Re-render component should not call fetchAPI again
-        render(<BookingPage />);
+        renderWithRouter(<BookingPage />);
 
         await waitFor(() => {
             expect(mockFetchAPI).toHaveBeenCalledTimes(2); // New instance, so +1
@@ -133,13 +145,15 @@ describe('BookingPage useEffect Management', () => {
     test('useEffect handles date changes properly', async () => {
         mockFetchAPI.mockReturnValue(['17:00', '18:00']);
 
-        render(<BookingPage />);
+        renderWithRouter(<BookingPage />);
 
         const dateInput = document.getElementById('date');
 
         // Multiple date changes
-        fireEvent.change(dateInput, { target: { value: '2024-12-25' } });
-        fireEvent.change(dateInput, { target: { value: '2024-12-26' } });
+        await act(async () => {
+            fireEvent.change(dateInput, { target: { value: '2024-12-25' } });
+            fireEvent.change(dateInput, { target: { value: '2024-12-26' } });
+        });
 
         await waitFor(() => {
             expect(mockFetchAPI).toHaveBeenCalledTimes(3); // Initial + 2 changes

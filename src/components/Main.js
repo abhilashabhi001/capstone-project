@@ -20,7 +20,7 @@ function Main() {
                 <Route path="/order" element={<div role="region" aria-label="Order online page placeholder">Order Online - Coming Soon</div>} />
                 <Route path="/login" element={<div role="region" aria-label="Login page placeholder">Login Page - Coming Soon</div>} />
                 <Route path="/confirmed" element={<ConfirmedBooking />} />
-                <Route path="*" element={<ConfirmedBooking to="/" replace />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
         </main>
     );
