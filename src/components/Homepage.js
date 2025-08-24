@@ -1,3 +1,4 @@
+import './Homepage.css';
 import React, { memo } from 'react';
 import CallToAction from './CallToAction';
 import Specials from './Specials';

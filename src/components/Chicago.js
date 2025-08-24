@@ -1,3 +1,4 @@
+import './Chicago.css';
 import React, { memo } from 'react';
 import restaurant from '../assets/images/restaurant.jpg';
 import MarioAndAdrian from '../assets/images/MarioAndAdrian.jpg'

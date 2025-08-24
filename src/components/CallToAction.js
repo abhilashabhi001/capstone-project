@@ -1,5 +1,7 @@
+import './CallToAction.css';
 import React, { memo } from 'react';
 import restaurantfood from '../assets/images/restauranFood.jpg';
+import { Link } from 'react-router-dom';
 
 const CallToAction = memo(() => {
     return (
@@ -9,14 +11,14 @@ const CallToAction = memo(() => {
                     <h1 id="hero-heading">Little Lemon</h1>
                     <h2>Chicago</h2>
                     <p>We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.</p>
-                    <a
-                        href="/booking"
+                    <Link
+                        to="/booking"
                         className="reserve-btn"
                         role="button"
                         aria-describedby="reserve-description"
                     >
                         Reserve a Table
-                    </a>
+                    </Link>
                     <span id="reserve-description" className="sr-only">
                         Navigate to booking page to make a reservation
                     </span>

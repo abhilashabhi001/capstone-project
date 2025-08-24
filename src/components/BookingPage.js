@@ -1,3 +1,4 @@
+import './BookingPage.css';
 import BookingForm from "./BookingForm";
 import { useReducer, useEffect, useCallback, useState } from 'react';
 

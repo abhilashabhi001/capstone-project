@@ -1,0 +1,268 @@
+/* ConfirmedBooking.css */
+
+.confirmed-booking {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #F4CE14 0%, #495E57 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+}
+
+.confirmed-booking::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.05"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.05"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.03"/><circle cx="10" cy="90" r="0.5" fill="%23ffffff" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+    pointer-events: none;
+}
+
+.confirmed-container {
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.confirmation-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 
+        0 20px 60px rgba(73, 94, 87, 0.3),
+        0 10px 30px rgba(73, 94, 87, 0.2),
+        0 5px 15px rgba(73, 94, 87, 0.1);
+    transform: translateY(0);
+    transition: all 0.3s ease;
+    border: 2px solid #F4CE14;
+    position: relative;
+    overflow: hidden;
+}
+
+.confirmation-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #F4CE14 0%, #495E57 50%, #F4CE14 100%);
+}
+
+.confirmation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 25px 70px rgba(73, 94, 87, 0.35),
+        0 15px 35px rgba(73, 94, 87, 0.25),
+        0 8px 20px rgba(73, 94, 87, 0.15);
+}
+
+.success-icon {
+    margin: 0 auto 30px;
+    animation: bounceIn 0.8s ease-out;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.confirmation-title {
+    font-size: 2.5rem;
+    color: #495E57;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    animation: slideInUp 0.6s ease-out 0.2s both;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.confirmation-message {
+    font-size: 1.1rem;
+    color: #333333;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    animation: slideInUp 0.6s ease-out 0.4s both;
+}
+
+.confirmation-details {
+    background: #F8F9FA;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-left: 4px solid #F4CE14;
+    animation: slideInUp 0.6s ease-out 0.6s both;
+}
+
+.confirmation-details p {
+    margin: 8px 0;
+    color: #666666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.confirmation-details p:first-child {
+    font-weight: 600;
+    color: #495E57;
+}
+
+.confirmation-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: slideInUp 0.6s ease-out 0.8s both;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 160px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: #495E57;
+    color: #FFFFFF;
+    box-shadow: 0 4px 15px rgba(73, 94, 87, 0.3);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:hover {
+    background: #3a4a47;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(73, 94, 87, 0.4);
+}
+
+.btn-secondary {
+    background: #FFFFFF;
+    color: #495E57;
+    border: 2px solid #495E57;
+    box-shadow: 0 4px 15px rgba(73, 94, 87, 0.1);
+}
+
+.btn-secondary:hover {
+    background: #495E57;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(73, 94, 87, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .confirmed-booking {
+        padding: 15px;
+    }
+    
+    .confirmation-card {
+        padding: 30px 20px;
+        border-radius: 15px;
+    }
+    
+    .confirmation-title {
+        font-size: 2rem;
+    }
+    
+    .confirmation-message {
+        font-size: 1rem;
+    }
+    
+    .confirmation-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .confirmation-card {
+        padding: 25px 15px;
+    }
+    
+    .confirmation-title {
+        font-size: 1.8rem;
+    }
+    
+    .success-icon svg {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .confirmation-details {
+        padding: 15px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .confirmed-booking {
+        background: #FFFFFF;
+        min-height: auto;
+        padding: 20px;
+    }
+    
+    .confirmation-card {
+        box-shadow: none;
+        border: 1px solid #CCCCCC;
+    }
+    
+    .confirmation-actions {
+        display: none;
+    }
+}

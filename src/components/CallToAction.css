@@ -1,0 +1,47 @@
+/* Call To Action Component Styles */
+.cta-section {
+  background-color: #F4CE14;
+  padding: clamp(2rem, 4vw, 3rem) 0;
+}
+
+.cta-container {
+  max-width: min(90vw, 1200px);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+  text-align: center;
+}
+
+.cta-section h2 {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  color: #333;
+  margin: 0 0 clamp(1rem, 2vw, 1.5rem) 0;
+  font-family: 'Markazi Text', serif;
+  font-weight: bold;
+}
+
+.cta-section p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: #333;
+  margin: 0 0 clamp(1.5rem, 3vw, 2rem) 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-btn {
+  background-color: #495E57;
+  color: #FFFFFF;
+  border: none;
+  padding: clamp(1rem, 2.5vw, 1.2rem) clamp(2rem, 4vw, 2.5rem);
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  font-weight: bold;
+  border-radius: clamp(6px, 1.5vw, 8px);
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.cta-btn:hover {
+  background-color: #3a4b45;
+}

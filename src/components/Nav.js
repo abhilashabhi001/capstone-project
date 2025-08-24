@@ -1,3 +1,4 @@
+import './Nav.css';
 import { Link, useLocation } from 'react-router-dom';
 
 function Nav() {

@@ -1,3 +1,4 @@
+import './Specials.css';
 import React, { memo } from 'react';
 import lemonDesert from '../assets/images/lemonDessert.jpg';
 import greekSalad from '../assets/images/greekSalad.jpg';

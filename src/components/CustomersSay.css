@@ -1,0 +1,82 @@
+/* Customers Say Component Styles */
+.customers-say {
+  background-color: #495E57;
+  padding: 0.5rem 0 clamp(2rem, 1vw, 8rem) 0;
+}
+
+.customers-container {
+  max-width: min(90vw, 1200px);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+}
+
+.customers-say h2 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: #EDEFEE;
+  text-align: center;
+  font-family: 'Markazi Text', serif;
+  font-weight: bold;
+  margin: 0;
+  padding: 2rem 0;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 4vw, 2rem);
+}
+
+.testimonial-card {
+  background: #EDEFEE;
+  border-radius: clamp(12px, 2vw, 16px);
+  padding: clamp(1.5rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.rating .stars {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  color: #F4CE14;
+}
+
+.customer-info {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.8rem, 2vw, 1rem);
+}
+
+.customer-image {
+  width: clamp(50px, 10vw, 60px);
+  height: clamp(50px, 10vw, 60px);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.customer-info h3 {
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  color: #333;
+  margin: 0;
+  font-weight: bold;
+}
+
+.review-text {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: #495E57;
+  line-height: 1.6;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Responsive Testimonials */
+@media (max-width: 1200px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+}

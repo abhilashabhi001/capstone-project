@@ -1,4 +1,6 @@
+import './BookingForm.css';
 import { useState, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function BookingForm({ availableTimes, dispatch }) {
     const [form, setForm] = useState({
@@ -9,6 +11,8 @@ function BookingForm({ availableTimes, dispatch }) {
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+    const navigate = useNavigate();
 
     // Memoized change handler to prevent unnecessary re-renders
     const handleChange = useCallback((e) => {
@@ -46,12 +50,6 @@ function BookingForm({ availableTimes, dispatch }) {
 
         if (isSubmitting) return;
 
-        // Validation
-        if (!form.date || !form.time) {
-            alert('Please select both date and time');
-            return;
-        }
-
         setIsSubmitting(true);
 
         const formData = {
@@ -76,16 +74,23 @@ function BookingForm({ availableTimes, dispatch }) {
                     guests: 1,
                     occasion: "Birthday"
                 });
-                alert('Reservation successful!');
+                setIsSuccess(true);
             } else {
-                alert('Failed to submit reservation. Please try again.');
+                setIsSuccess(false);
             }
         } catch (error) {
-            alert('An error occurred. Please try again.');
+            setIsSuccess(false);
         } finally {
             setIsSubmitting(false);
         }
     }, [form, isSubmitting]);
+
+    useEffect(() => {
+        if (isSuccess) {
+            navigate("/confirmed");
+        }
+    }, [isSuccess]);
+
     return (
         <main className="booking-page" role="main" aria-labelledby="booking-title">
             <section className="booking-hero" role="banner">
@@ -102,7 +107,6 @@ function BookingForm({ availableTimes, dispatch }) {
                         onSubmit={submitForm}
                         role="form"
                         aria-label="Restaurant table reservation form"
-                        noValidate
                     >
                         <div className="form-group" role="group" aria-labelledby="date-label">
                             <label id="date-label" htmlFor="date">Choose date:</label>

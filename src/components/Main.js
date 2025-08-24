@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Homepage from './Homepage';
 import BookingPage from './BookingPage';
 import Chicago from './Chicago';
+import ConfirmedBooking from './ConfirmedBooking';
 
 function Main() {
     return (
@@ -18,7 +19,8 @@ function Main() {
                 <Route path="/menu" element={<div role="region" aria-label="Menu page placeholder">Menu Page - Coming Soon</div>} />
                 <Route path="/order" element={<div role="region" aria-label="Order online page placeholder">Order Online - Coming Soon</div>} />
                 <Route path="/login" element={<div role="region" aria-label="Login page placeholder">Login Page - Coming Soon</div>} />
-                <Route path="*" element={<Navigate to="/" replace />} />
+                <Route path="/confirmed" element={<ConfirmedBooking />} />
+                <Route path="*" element={<ConfirmedBooking to="/" replace />} />
             </Routes>
         </main>
     );

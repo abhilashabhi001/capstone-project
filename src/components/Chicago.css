@@ -1,0 +1,114 @@
+/* Chicago Section Component Styles */
+.chicago-section {
+  background-color: #FFFFFF;
+  padding: clamp(3rem, 8vw, 8rem) 0;
+  contain: layout style paint;
+  transform: translateZ(0);
+}
+
+.chicago-container {
+  max-width: min(90vw, 1200px);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+}
+
+.chicago-content {
+  display: flex;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: flex-start;
+  contain: layout;
+}
+
+.chicago-text {
+  flex: 1;
+}
+
+.chicago-text h2 {
+  font-size: clamp(2.5rem, 6vw, 3rem);
+  color: #F4CE14;
+  margin: 0;
+  font-family: 'Markazi Text', serif;
+  font-weight: bold;
+}
+
+.chicago-text h3 {
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  color: #495E57;
+  margin: 0 0 clamp(1rem, 3vw, 1.5rem) 0;
+  font-family: 'Markazi Text', serif;
+}
+
+.chicago-text p {
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  color: #495E57;
+  line-height: 1.6;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+}
+
+.chicago-images {
+  flex: 0 0 min(50vw, 500px);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
+  position: relative;
+  contain: layout style paint;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.chef-image {
+  width: 100%;
+  height: clamp(150px, 20vw, 200px);
+  object-fit: cover;
+  border-radius: clamp(12px, 2vw, 16px);
+  transition: transform 0.2s ease;
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.chef-image:hover {
+  transform: translateZ(0) scale(1.02);
+}
+
+/* Performance Optimizations */
+.chef-image-1,
+.chef-image-2,
+.chef-image-3,
+.chef-image-4 {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Responsive Chicago Section */
+@media (max-width: 900px) {
+  .chicago-content {
+    flex-direction: column;
+    gap: clamp(2rem, 5vw, 3rem);
+  }
+  
+  .chicago-images {
+    flex: none;
+    max-width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(0.8rem, 2vw, 1.2rem);
+  }
+  
+  .chef-image {
+    height: clamp(120px, 18vw, 160px);
+  }
+}
+
+@media (max-width: 650px) {
+  .chicago-images {
+    grid-template-columns: 1fr;
+    gap: clamp(0.8rem, 2vw, 1rem);
+  }
+  
+  .chef-image {
+    grid-column: 1;
+    height: clamp(180px, 25vw, 220px);
+  }
+}
